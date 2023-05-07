@@ -1,0 +1,14 @@
+{
+    "imports": {
+        "@src/": "./src/",
+        "oak": "https://deno.land/x/oak@v12.4.0/mod.ts",
+        "std/": "https://deno.land/std@0.185.0/",
+        "dotenv/": "https://deno.land/std@0.186.0/dotenv/",
+        "zod": "https://deno.land/x/zod@v3.21.4/mod.ts",
+        "cors": "https://deno.land/x/cors@v1.2.2/mod.ts"
+    },
+    "tasks": {
+        "start": "deno run -A main.ts",
+        "dev": "deno run -A --watch src/main.ts"
+    }
+}
