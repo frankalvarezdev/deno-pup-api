@@ -120,6 +120,25 @@ router.delete('/v1/processes/:id', (ctx) => {
     apiResponse(ctx, process.config)
 })
 
+// api para obtener los logs de un proceso
+router.get('/v1/processes/:id/logs', async (ctx) => {
+    const id = ctx.params.id
+    const process = pup
+        .allProcesses()
+        .find((process) => process.config.id === id)
+    if (!process) {
+        throw new ApiError('Process not found', 404)
+    }
+
+    try {
+        const log = await Deno.readTextFile(`./logs/${id}.log`)
+        apiResponse(ctx, log)
+    } catch (error) {
+        const message = error?.message || 'Log not found'
+        throw new ApiError(message, 404)
+    }
+})
+
 app.use(router.routes())
 
 const port = Number(Deno.env.get('PORT')) || 5566
