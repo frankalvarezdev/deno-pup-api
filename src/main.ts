@@ -53,6 +53,7 @@ router.post('/v1/processes/start', async (ctx) => {
         z.object({
             id: z.number(),
             cmd: z.string(),
+            cwd: z.string().optional(),
         })
     )
     const cmd = generateCmd(data.cmd)
@@ -70,6 +71,7 @@ router.post('/v1/processes/start', async (ctx) => {
     const process = new Process(pup, {
         id: id,
         cmd,
+        cwd: data?.cwd,
         logger: {
             stderr: `./logs/${data.id}.log`,
             stdout: `./logs/${data.id}.log`,
