@@ -54,6 +54,7 @@ router.post('/v1/processes/start', async (ctx) => {
             id: z.number(),
             cmd: z.string(),
             cwd: z.string().optional(),
+            env: z.record(z.string()).optional(),
         })
     )
     const cmd = generateCmd(data.cmd)
@@ -77,6 +78,7 @@ router.post('/v1/processes/start', async (ctx) => {
             stdout: `./logs/${data.id}.log`,
             console: false,
         },
+        env: data?.env,
     })
     pup.processes.push(process)
     pup.start(id, 'api')
