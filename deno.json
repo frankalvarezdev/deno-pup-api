@@ -8,7 +8,7 @@
         "cors": "https://deno.land/x/cors@v1.2.2/mod.ts"
     },
     "tasks": {
-        "start": "deno run -A main.ts",
+        "start": "deno run -A src/main.ts",
         "dev": "deno run -A --watch src/main.ts"
     }
 }
